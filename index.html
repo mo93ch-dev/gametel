@@ -1,0 +1,1022 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="fa">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> تب تو ارن 💰 </title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<style type="text/css">body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #8e44ad, #f39c12);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+            user-select: none; /* جلوگیری از انتخاب متن */
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: auto;
+            max-height: 70%;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background: linear-gradient(to bottom right, #8e44ad, #f39c12);
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close {
+            color: #FFD700;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #f39c12;
+            text-decoration: none;
+        }
+
+        #coin {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            outline: none;
+            box-shadow: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #radioButton {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        #radioButton:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        #settingsButton {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            position: absolute;
+            top: 20px;
+            left: 80px;
+        }
+
+        #coin:hover {
+            transform: scale(1.1);
+        }
+
+        #radioButton:hover,
+        #settingsButton:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            color: white;
+            font-size: 18px;
+        }
+
+        h2 { color: white; }
+        #score { font-size: 30px; color: #FFD700; }
+
+        #buttons {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        #buttons button {
+            background-color: #8e44ad;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: 700;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        #buttons button:hover { 
+            background-color: #f39c12;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 0); }
+            25% { transform: translate(-1px, 0); }
+            50% { transform: translate(1px, 0); }
+            75% { transform: translate(-1px, 0); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .shake {
+            animation: shake 0.2s;
+        }
+
+        .modal-content button {
+            background: linear-gradient(to right, #8e44ad, #FFD700);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: 700;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        .modal-content button:hover {
+            background: linear-gradient(to right, #FFD700, #8e44ad);
+        }
+
+        #profile {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+        }
+
+        .score-animation {
+            position: absolute;
+            color: #FFD700;
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            animation: moveUp 2s forwards;
+        }
+
+        @keyframes moveUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-200px);
+                opacity: 0;
+            }
+        }
+
+        .level-slogan {
+            color: #FFD700;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .station-list {
+            display: none;
+            margin-top: 20px;
+            background: linear-gradient(to bottom right, #FFD700, #8e44ad);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .station-list a {
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .station-list a:hover {
+            background-color: rgba(255, 215, 0, 0.5);
+        }
+
+        .arrow {
+            font-size: 16px;
+            margin-right: 5px;
+        }
+
+        .current-station {
+            font-size: 16px;
+            color: #FFD700;
+            animation: pulse 1.5s infinite;
+            margin: 20px 0;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                color: #FFD700;
+            }
+            50% {
+                transform: scale(1.1);
+                color: #FF6347;
+            }
+            100% {
+                transform: scale(1);
+                color: #FFD700;
+            }
+        }
+
+        #countdownTimer {
+            font-size: 18px;
+            color: #FFD700;
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px #FFD700;
+            }
+            100% {
+                box-shadow: 0 0 20px #FFD700;
+            }
+        }
+
+        .time-options {
+            margin-top: 10px;
+            background: linear-gradient(to bottom right, #FFD700, #8e44ad);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .time-options a {
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .time-options a:hover {
+            background-color: rgba(255, 215, 0, 0.5);
+        }
+
+        #cancelButton {
+            display: none;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .time-button {
+            font-size: 20px;
+        }
+
+        .time-button .material-icons {
+            font-size: 36px;
+            color: #FFD700;
+            transition: transform 0.3s ease;
+        }
+
+        .time-button:hover .material-icons {
+            transform: scale(1.2);
+        }
+
+        .station-selection-message {
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-size: 16px;
+            display: none;
+        }
+
+        #autoOffMessage {
+            color: #FFD700;
+            font-size: 16px;
+            display: none;
+        }
+
+        #timeSelectionMessage {
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-size: 16px;
+            display: none;
+        }
+	</style>
+</head>
+<body>
+<div id="profile">👤 کاربر: مهمان</div>
+
+<p><button id="radioButton" onclick="toggleRadio()">📻</button><button id="settingsButton" onclick="openSettings()">⚙️</button></p>
+
+<h1>هر یک کلیک، یک گام به سوی موفقیت</h1>
+
+<h2>💵 <span id="score">0</span></h2>
+
+<p><img alt="Coin" id="coin" onclick="earnMoney(event)" src="https://uploadkon.ir/uploads/01ee15_252aa8d87c-857c-407b-b549-9e10edfd52d8-removebg.png" /></p>
+
+<div id="buttons"><button onclick="shakeButton(this); showRankings();"><i class="material-icons">assignment</i> درجه</button><button onclick="shakeButton(this); showFriends();"><i class="material-icons">group</i> دوستان</button><button onclick="shakeButton(this); showTasks();"><i class="material-icons">task</i> وظایف</button><button onclick="shakeButton(this); openShop();"><i class="material-icons">shopping_cart</i> فروشگاه</button><button onclick="shakeButton(this); goHome();"><i class="material-icons home-icon">home</i> خانه</button></div>
+
+<div class="modal" id="shop">
+<div class="modal-content"><span class="close" onclick="closeModal('shop')">&times;</span>
+
+<h3>🛍️ فروشگاه</h3>
+<button onclick="buyItem(5, 2)">📈 افزایش درآمد (5)</button><button onclick="buyItem(15, 5)">🔥 درآمد بیشتر (15)</button><button onclick="openPurchaseModal()">💎 خرید امتیاز</button><button onclick="closeModal('shop')">بستن</button></div>
+</div>
+
+<div class="modal" id="purchaseModal">
+<div class="modal-content"><span class="close" onclick="closeModal('purchaseModal')">&times;</span>
+
+<h3>خرید امتیاز در حال حاضر رایگان می‌باشد</h3>
+
+<p>لطفاً یکی از گزینه&zwnj;های زیر را انتخاب کنید</p>
+
+<div class="purchase-option"><span>یک میلیون امتیاز - 10 ستاره <span class="material-icons star-icon" style="color: #FFD700;">star</span></span><button onclick="purchasePoints(1000000, 10)">خرید</button></div>
+
+<div class="purchase-option"><span>دو میلیون امتیاز - 15 ستاره <span class="material-icons star-icon" style="color: #FFD700;">star</span></span><button onclick="purchasePoints(2000000, 15)">خرید</button></div>
+
+<div class="purchase-option"><span>پنج میلیون امتیاز - 30 ستاره <span class="material-icons star-icon" style="color: #FFD700;">star</span></span><button onclick="purchasePoints(5000000, 30)">خرید</button></div>
+
+<div class="purchase-option"><span>ده میلیون امتیاز - 50 ستاره <span class="material-icons star-icon" style="color: #FFD700;">star</span></span><button onclick="purchasePoints(10000000, 50)">خرید</button></div>
+<button onclick="closeModal('purchaseModal')">بستن</button></div>
+</div>
+
+<div class="modal" id="purchaseConfirmationModal">
+<div class="modal-content"><span class="close" onclick="closeModal('purchaseConfirmationModal')">&times;</span>
+
+<h3>خرید موفقیت&zwnj;آمیز!</h3>
+
+<p id="purchaseMessage">&nbsp;</p>
+<button onclick="closeModal('purchaseConfirmationModal')">بستن</button></div>
+</div>
+
+<p>
+<audio id="clickSound" src="https://uploadkon.ir/uploads/a29511_25new-ford-chime.mp3">&nbsp;</audio>
+
+<audio id="silverSound" src="https://uploadkon.ir/uploads/42e211_25switch-sound.mp3">&nbsp;</audio>
+
+<audio id="goldSound" src="https://uploadkon.ir/uploads/b3a611_25i-c.mp3">&nbsp;</audio>
+
+<audio id="platinumSound" src="https://uploadkon.ir/uploads/c3f611_25clicksoundeffect.mp3">&nbsp;</audio>
+
+<audio id="galaxySound" src="https://uploadkon.ir/uploads/c3f611_25clicksoundeffect.mp3">&nbsp;</audio>
+
+<audio id="errorSound" src="https://uploadkon.ir/uploads/4b8b11_25erro.mp3">&nbsp;</audio>
+
+<audio id="radioPlayer"><source src="https://solid41.streamupsolutions.com/proxy/lmuespnh?mp=/;type=mp3" type="audio/mp3" /></audio>
+</p>
+
+<div class="modal" id="buyModal">
+<div class="modal-content"><span class="close" onclick="closeModal('buyModal')">&times;</span>
+
+<p>هزینه پخش رادیو برای شما ۱ میلیون سکه می‌باشد آیا حاضر هستید پرداخت کنید؟</p>
+<button onclick="confirmPurchase()">تأیید</button><button onclick="closeModal('buyModal')">لغو</button><button id="stationToggleButton" onclick="toggleStationList()"><span class="arrow" id="stationToggleArrow">▼</span>انتخاب ایستگاه</button>
+
+<div class="station-list" id="stationList">
+<p class="station-selection-message" id="stationSelectionMessage">یک ایستگاه را برای پخش انتخاب کنید</p>
+<a href="#" onclick="selectStation('صدای افغان', 'https://solid41.streamupsolutions.com/proxy/lmuespnh?mp=/;type=mp3')">صدای افغان</a> <a href="#" onclick="selectStation('آرمان موزیک', 'https://stream.zeno.fm/jbjlkm14fevvv')">آرمان موزیک</a> <a href="#" onclick="selectStation('سرود', 'http://stream.cloud.radiosrood.com:8000/live')">سرود</a> <a href="#" onclick="selectStation('بورجال', 'https://s49.radiolize.com/radio/8180/radio.mp3')">بورجال</a> <a href="#" onclick="selectStation('جوانان', 'https://s3.radio.co/s3a13a855f/listen')">جوانان</a></div>
+</div>
+</div>
+
+<div class="modal" id="cancelModal">
+<div class="modal-content"><span class="close" onclick="closeModal('cancelModal')">&times;</span>
+
+<p>در صورت توقف رادیو</p>
+
+<p>اگر زمان استفاده شما کمتر از ۵ دقیقه باشد، <strong>۹۰ درصد</strong> از امتیاز پرداخت شده به حساب شما برمی&zwnj;گردد.</p>
+
+<p id="usageTime">زمان استفاده: <span id="elapsedTime">0:00</span></p>
+
+<p class="current-station" id="currentStationDisplay">ایستگاه در حال پخش: <span id="currentStationName">صدای افغان</span></p>
+
+<div class="button-container">
+<div class="button-row"><button id="stationToggleButtonCancel" onclick="toggleStationListCancel()"><span class="arrow" id="stationToggleArrowCancel">▼</span>تغییر ایستگاه</button></div>
+
+<div class="button-row"><button class="cancel-button" onclick="confirmCancellation()">توقف</button><button class="cancel-button" onclick="closeModal('cancelModal')">بستن</button><button class="time-button" id="timeButton" onclick="toggleTimeOptions()"><span class="material-icons">timer</span></button></div>
+</div>
+
+<p class="station-selection-message" id="stationSelectionMessage">یک ایستگاه را برای پخش انتخاب کنید</p>
+
+<p id="autoOffMessage">یک گزینه را برای توقف خودکار انتخاب کنید:</p>
+
+<p class="station-selection-message" id="timeSelectionMessage" style="display: none;">&nbsp;</p>
+
+<div class="time-options" id="timeOptions" style="display: none;"><a href="#" onclick="setDuration(10)">10 دقیقه</a> <a href="#" onclick="setDuration(20)">20 دقیقه</a> <a href="#" onclick="setDuration(30)">30 دقیقه</a> <a href="#" onclick="setDuration(45)">45 دقیقه</a> <a href="#" onclick="setDuration(60)">1 ساعت</a></div>
+
+<div id="countdownTimer" style="display: none;">&nbsp;</div>
+<button id="cancelButton" onclick="cancelCountdown()">لغو تایمر</button>
+
+<div class="station-list" id="stationListCancel">
+<p class="station-selection-message" id="stationSelectionMessageCancel">یک ایستگاه را برای پخش انتخاب کنید</p>
+<a href="#" onclick="selectStation('صدای افغان', 'https://solid41.streamupsolutions.com/proxy/lmuespnh?mp=/;type=mp3')">صدای افغان</a> <a href="#" onclick="selectStation('آرمان موزیک', 'https://stream.zeno.fm/jbjlkm14fevvv')">آرمان موزیک</a> <a href="#" onclick="selectStation('سرود', 'http://stream.cloud.radiosrood.com:8000/live')">سرود</a> <a href="#" onclick="selectStation('بورجال', 'https://s49.radiolize.com/radio/8180/radio.mp3')">بورجال</a> <a href="#" onclick="selectStation('جوانان', 'https://s3.radio.co/s3a13a855f/listen')">جوانان</a></div>
+</div>
+</div>
+
+<div class="modal" id="refundModal">
+<div class="modal-content"><span class="close" onclick="closeModal('refundModal')">&times;</span>
+
+<h3>مبلغ برگشتی</h3>
+
+<p id="refundMessage">&nbsp;</p>
+<button onclick="closeModal('refundModal')">بستن</button></div>
+</div>
+
+<div class="modal" id="settingsModal">
+<div class="modal-content"><span class="close" onclick="closeModal('settingsModal')">&times;</span>
+
+<h3>تنظیمات</h3>
+
+<p>ویبره:</p>
+<button onclick="toggleVibration()">تغییر وضعیت</button>
+
+<p>صدا:</p>
+<button onclick="toggleSound()">تغییر وضعیت</button></div>
+</div>
+
+<div class="modal" id="levelModal">
+<div class="modal-content"><span class="close" onclick="closeModal('levelModal')">&times;</span>
+
+<h2>اطلاعات سطح کاربری</h2>
+
+<div id="levelInfo">&nbsp;</div>
+
+<div id="levelDetails">&nbsp;</div>
+
+<div class="level-slogan" id="levelSlogan">&nbsp;</div>
+<button onclick="closeModal('levelModal')">بستن</button></div>
+</div>
+
+<div class="modal" id="friendsModal">
+<div class="modal-content"><span class="close" onclick="closeModal('friendsModal')">&times;</span>
+
+<h2>دوستان</h2>
+
+<p>لیست دوستان شما:</p>
+
+<ul>
+	<li>دوست 1</li>
+	<li>دوست 2</li>
+	<li>دوست 3</li>
+</ul>
+<button onclick="closeModal('friendsModal')">بستن</button></div>
+</div>
+
+<div class="modal" id="tasksModal">
+<div class="modal-content"><span class="close" onclick="closeModal('tasksModal')">&times;</span>
+
+<h2>وظایف</h2>
+
+<p>لیست وظایف شما:</p>
+
+<ul>
+	<li>وظیفه 1</li>
+	<li>وظیفه 2</li>
+	<li>وظیفه 3</li>
+</ul>
+<button onclick="closeModal('tasksModal')">بستن</button></div>
+</div>
+
+<div class="modal" id="insufficientFundsModal">
+<div class="modal-content"><span class="close" onclick="closeModal('insufficientFundsModal')">&times;</span>
+
+<h3>خطا</h3>
+
+<p>موجودی شما برای این عملیات کافی نیست!</p>
+<button onclick="closeModal('insufficientFundsModal')">بستن</button></div>
+</div>
+
+<div class="modal" id="settingsStatusModal">
+<div class="modal-content"><span class="close" onclick="closeModal('settingsStatusModal')">&times;</span>
+
+<h3>وضعیت</h3>
+
+<p id="settingsStatusMessage">&nbsp;</p>
+<button onclick="closeModal('settingsStatusModal')">بستن</button></div>
+</div>
+<script>
+        let score = parseInt(localStorage.getItem("score")) || 0;
+        let incomePerClick = parseInt(localStorage.getItem("income")) || 1;
+        let upgradeCost = parseInt(localStorage.getItem("upgradeCost")) || 10;
+        let clickCount = parseInt(localStorage.getItem("clickCount")) || 0;
+        let radioPlaying = false;
+        let radioStartTime = null;
+        let usageTimer = null;
+        let elapsedTime = 0;
+        let purchaseTime = null;
+        let radioCost = 500000;
+        let vibrationEnabled = true;
+        let soundEnabled = true;
+        let currentLevel = getUserLevel(score).level;
+        let selectedStation = "صدای افغان";
+        let selectedStationLink = "https://solid41.streamupsolutions.com/proxy/lmuespnh?mp=/;type=mp3";
+
+        const slogans = {
+            "برنز": "شروعی قوی برای موفقیت!",
+            "نقره": "به سمت قله‌ها حرکت کنید!",
+            "طلا": "شما در حال درخشش هستید!",
+            "پلاتینیوم": "به اوج خود نزدیک می‌شوید!",
+            "کهکشان": "شما ستاره‌ای در آسمان هستید!"
+        };
+
+        const levelOrder = ["برنز", "نقره", "طلا", "پلاتینیوم", "کهکشان"];
+
+        window.onload = function() {
+            document.getElementById("radioPlayer").src = selectedStationLink;
+            document.getElementById("currentStationName").innerText = selectedStation;
+            updateUI();
+
+            document.addEventListener('click', function(event) {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    if (modal.style.display === 'block' && !modal.contains(event.target) && !event.target.closest('#buttons') && event.target.id !== 'radioButton' && event.target.id !== 'settingsButton') {
+                        closeModal(modal.id);
+                    }
+                });
+            });
+        };
+
+        function earnMoney(event) {
+            event.preventDefault(); // جلوگیری از رفتار پیش‌فرض
+            score += incomePerClick;
+            clickCount++;
+            localStorage.setItem("score", score);
+            localStorage.setItem("clickCount", clickCount);
+            updateUI();
+
+            if (soundEnabled) {
+                document.getElementById("clickSound").currentTime = 0;
+                document.getElementById("clickSound").play();
+            }
+
+            if (vibrationEnabled) {
+                activateVibration(30);
+            }
+
+            displayScore(event.clientX, event.clientY, incomePerClick);
+        }
+
+        function displayScore(x, y, amount) {
+            const scoreElement = document.createElement('div');
+            scoreElement.className = 'score-animation';
+            scoreElement.innerText = `+${amount}`;
+            scoreElement.style.left = `${x}px`;
+            scoreElement.style.top = `${y}px`;
+            document.body.appendChild(scoreElement);
+
+            setTimeout(() => {
+                scoreElement.remove();
+            }, 2000);
+        }
+
+        function activateVibration(duration) {
+            if ("vibrate" in navigator) {
+                navigator.vibrate(duration);
+            }
+        }
+
+        function shakeButton(button) {
+            button.classList.add('shake');
+            setTimeout(() => {
+                button.classList.remove('shake');
+            }, 300);
+        }
+
+        function toggleRadio() {
+            closeAllModals();
+            if (!radioPlaying) {
+                document.getElementById("buyModal").style.display = "block"; // باز کردن پنجره خرید اگر رادیو در حال پخش نیست
+            } else {
+                document.getElementById("cancelModal").style.display = "block";
+            }
+        }
+
+        function confirmPurchase() {
+            if (score < radioCost) {
+                document.getElementById("insufficientFundsModal").style.display = "block";
+                document.getElementById("errorSound").play();
+                closeModal("buyModal");
+                return;
+            }
+
+            score -= radioCost;
+            localStorage.setItem("score", score);
+            
+            if (selectedStationLink === "") {
+                selectedStationLink = "https://solid41.streamupsolutions.com/proxy/lmuespnh?mp=/;type=mp3";
+                selectedStation = "صدای افغان";
+            }
+
+            document.getElementById("radioPlayer").src = selectedStationLink;
+            document.getElementById("radioPlayer").play();
+            radioPlaying = true;
+            radioStartTime = Date.now();
+            purchaseTime = Date.now();
+            startUsageTimer();
+            closeModal("buyModal");
+            document.getElementById("currentStationName").innerText = selectedStation;
+            updateUI();
+        }
+
+        function confirmCancellation() {
+            let refund = (elapsedTime < 300) ? Math.round(radioCost * 0.9) : 0;
+            score += refund;
+            localStorage.setItem("score", score);
+            document.getElementById("refundMessage").innerText = `مبلغ برگشتی شما: ${refund.toLocaleString()} سکه`;
+            document.getElementById("refundModal").style.display = "block";
+            closeModal("cancelModal");
+            document.getElementById("radioPlayer").pause();
+            radioPlaying = false;
+            radioStartTime = null;
+            clearInterval(usageTimer);
+            updateUI();
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        function closeAllModals() {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none';
+            });
+        }
+
+        function startUsageTimer() {
+            usageTimer = setInterval(function () {
+                elapsedTime = (Date.now() - radioStartTime) / 1000;
+                let minutes = Math.floor(elapsedTime / 60);
+                let seconds = Math.floor(elapsedTime % 60);
+                document.getElementById("elapsedTime").innerText = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+            }, 1000);
+        }
+
+        function toggleStationList() {
+            const stationList = document.getElementById("stationList");
+            const arrow = document.getElementById("stationToggleArrow");
+            const message = document.getElementById("stationSelectionMessage");
+            const timeOptions = document.getElementById("timeOptions");
+            const autoOffMessage = document.getElementById("autoOffMessage");
+
+            if (stationList.style.display === "none" || stationList.style.display === "") {
+                stationList.style.display = "block";
+                arrow.innerText = "▲";
+                message.style.display = "block";
+                timeOptions.style.display = "none";
+                autoOffMessage.style.display = "none";
+                stationList.scrollIntoView({ behavior: "smooth", block: "center" }); // اسکرول به مرکز
+            } else {
+                stationList.style.display = "none";
+                arrow.innerText = "▼";
+                message.style.display = "none";
+            }
+        }
+
+        function toggleStationListCancel() {
+            const stationList = document.getElementById("stationListCancel");
+            const arrow = document.getElementById("stationToggleArrowCancel");
+            const message = document.getElementById("stationSelectionMessageCancel");
+
+            if (stationList.style.display === "none" || stationList.style.display === "") {
+                stationList.style.display = "block";
+                arrow.innerText = "▲";
+                message.style.display = "block";
+                message.innerText = "یک ایستگاه را برای پخش انتخاب کنید";
+                stationList.scrollIntoView({ behavior: "smooth", block: "center" }); // اسکرول به مرکز
+            } else {
+                stationList.style.display = "none";
+                arrow.innerText = "▼";
+                message.style.display = "none";
+            }
+        }
+
+        function toggleTimeOptions() {
+            const timeOptions = document.getElementById("timeOptions");
+            const autoOffMessage = document.getElementById("autoOffMessage");
+            const stationList = document.getElementById("stationList");
+            const stationListCancel = document.getElementById("stationListCancel");
+            const timeSelectionMessage = document.getElementById("timeSelectionMessage");
+
+            if (timeOptions.style.display === "none" || timeOptions.style.display === "") {
+                timeOptions.style.display = "block";
+                autoOffMessage.style.display = "none";
+                stationList.style.display = "none";
+                stationListCancel.style.display = "none";
+                timeSelectionMessage.innerText = "زمان توقف خودکار را انتخاب کنید";
+                timeSelectionMessage.style.display = "block";
+                timeOptions.scrollIntoView({ behavior: "smooth", block: "center" }); // اسکرول به مرکز
+            } else {
+                timeOptions.style.display = "none";
+                autoOffMessage.style.display = "none";
+                timeSelectionMessage.style.display = "none";
+            }
+        }
+
+        function setDuration(minutes) {
+            if (countdownTimer) {
+                cancelCountdown();
+            }
+            startCountdown(minutes);
+            document.getElementById("timeOptions").style.display = "none";
+            document.getElementById("autoOffMessage").style.display = "none";
+            document.getElementById("timeSelectionMessage").style.display = "none";
+            document.getElementById("countdownTimer").style.display = "block";
+            document.getElementById("cancelButton").style.display = "inline-block";
+        }
+
+        function startCountdown(minutes) {
+            let timeInSeconds = minutes * 60;
+            const countdownDisplay = document.getElementById('countdownTimer');
+            countdownDisplay.innerText = '';
+
+            countdownTimer = setInterval(() => {
+                let minutesLeft = Math.floor(timeInSeconds / 60);
+                let secondsLeft = timeInSeconds % 60;
+                countdownDisplay.innerText = `زمان باقی‌مانده: ${minutesLeft}:${secondsLeft < 10 ? "0" + secondsLeft : secondsLeft}`;
+                timeInSeconds--;
+
+                if (timeInSeconds < 0) {
+                    clearInterval(countdownTimer);
+                    document.getElementById("radioPlayer").pause();
+                    radioPlaying = false;
+                    countdownDisplay.innerText = "پخش رادیو متوقف شد.";
+                    document.getElementById("cancelButton").style.display = "none";
+                }
+            }, 1000);
+        }
+
+        function cancelCountdown() {
+            clearInterval(countdownTimer);
+            document.getElementById("countdownTimer").style.display = "none";
+            document.getElementById("countdownTimer").innerText = '';
+            document.getElementById("cancelButton").style.display = "none";
+        }
+
+        function selectStation(station, link) {
+            selectedStation = station;
+            selectedStationLink = link;
+            document.getElementById("stationList").style.display = "none";
+            document.getElementById("stationListCancel").style.display = "none";
+            document.querySelector('#buyModal #stationToggleButton').innerHTML = `<span class="arrow">▼</span>${selectedStation}`;
+            
+            if (document.getElementById("buyModal").style.display === "block") {
+                document.getElementById("radioPlayer").src = selectedStationLink;
+            } else {
+                document.getElementById("radioPlayer").src = selectedStationLink;
+                document.getElementById("radioPlayer").play();
+                radioPlaying = true;
+                document.getElementById("currentStationName").innerText = selectedStation;
+            }
+        }
+
+        function updateUI() {
+            document.getElementById("score").innerText = score.toLocaleString();
+
+            const userLevelInfo = getUserLevel(score);
+            switch (userLevelInfo.level) {
+                case "برنز":
+                    radioCost = 500000;
+                    break;
+                case "نقره":
+                    radioCost = 1000000;
+                    break;
+                case "طلا":
+                    radioCost = 2000000;
+                    break;
+                case "پلاتینیوم":
+                    radioCost = 3000000;
+                    break;
+                case "کهکشان":
+                    radioCost = 5000000;
+                    break;
+            }
+            document.getElementById("radioCost").innerText = radioCost.toLocaleString();
+
+            document.getElementById("levelInfo").innerHTML = `
+                <div>
+                    ${userLevelInfo.icon} سطح: ${userLevelInfo.level}
+                </div>
+            `;
+            document.getElementById("levelDetails").innerHTML = `
+                <div>امتیاز فعلی: ${score.toLocaleString()}</div>
+                <div>
+                    ${userLevelInfo.level === "کهکشان" ? "سطح بعدی وجود ندارد" : `نیاز به ${userLevelInfo.pointsNeeded.toLocaleString()} امتیاز برای ارتقا به ${userLevelInfo.nextLevel || "سطح بعدی"}`}
+                </div>
+            `;
+
+            document.getElementById("levelSlogan").innerText = slogans[userLevelInfo.level];
+
+            if (userLevelInfo.level !== currentLevel) {
+                const oldLevelIndex = levelOrder.indexOf(currentLevel);
+                const newLevelIndex = levelOrder.indexOf(userLevelInfo.level);
+                if (newLevelIndex > oldLevelIndex) {
+                    showLevelChangeModal("تبریک!", `شما به سطح ${userLevelInfo.level} صعود کردید!`, slogans[userLevelInfo.level]);
+                } else if (newLevelIndex < oldLevelIndex) {
+                    showLevelChangeModal("هشدار!", `شما از سطح ${currentLevel} به سطح ${userLevelInfo.level} سقوط کردید!`, slogans[userLevelInfo.level]);
+                }
+                currentLevel = userLevelInfo.level;
+            }
+
+            playSoundForLevel(userLevelInfo.level);
+        }
+
+        function showLevelChangeModal(title, message, slogan) {
+            const levelChangeModal = document.createElement('div');
+            levelChangeModal.className = 'modal';
+            levelChangeModal.id = 'levelChangeModal';
+            levelChangeModal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('levelChangeModal')">×</span>
+                    <h3>${title}</h3>
+                    <p>${message}</p>
+                    <p>${slogan}</p>
+                </div>
+            `;
+            document.body.appendChild(levelChangeModal);
+            levelChangeModal.style.display = 'block';
+        }
+
+        function playSoundForLevel(level) {
+            switch (level) {
+                case "برنز":
+                    document.getElementById("clickSound").src = "https://uploadkon.ir/uploads/a29511_25new-ford-chime.mp3";
+                    break;
+                case "نقره":
+                    document.getElementById("clickSound").src = "https://uploadkon.ir/uploads/42e211_25switch-sound.mp3";
+                    break;
+                case "طلا":
+                    document.getElementById("clickSound").src = "https://uploadkon.ir/uploads/b3a611_25i-c.mp3";
+                    break;
+                case "پلاتینیوم":
+                    document.getElementById("clickSound").src = "https://uploadkon.ir/uploads/c3f611_25clicksoundeffect.mp3";
+                    break;
+                case "کهکشان":
+                    document.getElementById("clickSound").src = "https://uploadkon.ir/uploads/c3f611_25clicksoundeffect.mp3";
+                    break;
+                default:
+                    document.getElementById("clickSound").src = "https://uploadkon.ir/uploads/4b8b11_25erro.mp3";
+                    break;
+            }
+        }
+
+        function getUserLevel(score) {
+            if (score < 1000000) {
+                return { level: "برنز", icon: "🥉", nextLevel: "نقره", pointsNeeded: 1000000 - score };
+            } else if (score < 10000000) {
+                return { level: "نقره", icon: "🥈", nextLevel: "طلا", pointsNeeded: 10000000 - score };
+            } else if (score < 100000000) {
+                return { level: "طلا", icon: "🥇", nextLevel: "پلاتینیوم", pointsNeeded: 100000000 - score };
+            } else if (score < 1000000000) {
+                return { level: "پلاتینیوم", icon: "💎", nextLevel: "کهکشان", pointsNeeded: 1000000000 - score };
+            } else {
+                return { level: "کهکشان", icon: "🌌", nextLevel: null, pointsNeeded: 0 };
+            }
+        }
+
+        function showRankings() {
+            closeAllModals();
+            const userLevelInfo = getUserLevel(score);
+            document.getElementById("levelInfo").innerHTML = `
+                <div>
+                    ${userLevelInfo.icon} سطح شما: ${userLevelInfo.level}
+                </div>
+            `;
+            document.getElementById("levelDetails").innerHTML = `
+                <div>امتیاز فعلی شما: ${score.toLocaleString()}</div>
+                <div>
+                    ${userLevelInfo.level === "کهکشان" ? "سطح بعدی وجود ندارد" : `نیاز به ${userLevelInfo.pointsNeeded.toLocaleString()} امتیاز برای ارتقا به ${userLevelInfo.nextLevel || "سطح بعدی"}`}
+                </div>
+            `;
+            document.getElementById("levelSlogan").innerText = slogans[userLevelInfo.level];
+            document.getElementById("levelModal").style.display = "block";
+        }
+
+        function openShop() {
+            closeAllModals();
+            document.getElementById("shop").style.display = "block";
+        }
+
+        function closeShop() {
+            closeModal('shop');
+        }
+
+        function openPurchaseModal() {
+            closeAllModals();
+            document.getElementById("purchaseModal").style.display = "block";
+        }
+
+        function purchasePoints(coins, stars) {
+            if (score >= stars) {
+                score -= stars;
+                localStorage.setItem("score", score);
+                score += coins;
+                localStorage.setItem("score", score);
+
+                document.getElementById("purchaseMessage").innerText = `شما ${coins.toLocaleString()} سکه خریداری کردید!`;
+                document.getElementById("purchaseConfirmationModal").style.display = "block";
+
+                updateUI();
+                closeModal('purchaseModal');
+            } else {
+                document.getElementById("insufficientFundsModal").style.display = "block";
+                document.getElementById("errorSound").play();
+            }
+        }
+
+        function showFriends() {
+            closeAllModals();
+            document.getElementById("friendsModal").style.display = "block";
+        }
+
+        function showTasks() {
+            closeAllModals();
+            document.getElementById("tasksModal").style.display = "block";
+        }
+
+        function goHome() {
+            closeAllModals();
+        }
+
+        function openSettings() {
+            closeAllModals();
+            document.getElementById("settingsModal").style.display = "block";
+        }
+
+        function toggleVibration() {
+            vibrationEnabled = !vibrationEnabled;
+            document.getElementById("settingsStatusMessage").innerText = `ویبره ${vibrationEnabled ? 'فعال' : 'غیرفعال'} شد.`;
+            document.getElementById("settingsStatusModal").style.display = "block";
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById("settingsStatusMessage").innerText = `صدا ${soundEnabled ? 'فعال' : 'غیرفعال'} شد.`;
+            document.getElementById("settingsStatusModal").style.display = "block";
+        }
+
+        updateUI();
+    </script></body>
+</html>
