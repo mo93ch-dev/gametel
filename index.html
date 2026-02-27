@@ -255,7 +255,7 @@ box-shadow:0 8px 20px rgba(0,0,0,0.5);
 <div class="popup-bg" id="costInfoBg">
   <div class="popup">
     <span class="closePopup" onclick="costInfoBg.style.display='none'">✖</span>
-    <h2>💡 برای پخش رادیو به ۳۰۰ سکه نیاز است!</h2>
+    <h2>💡 سکه شما ناکافی می باشد برای پخش رادیو به ۳۰۰ سکه نیاز است!</h2>
     <div class="popup-buttons">
       <button id="acknowledgeCost">👌 متوجه شدم</button>
     </div>
@@ -407,7 +407,7 @@ inviteConfirm.addEventListener("click",()=>{
 copyInvite.addEventListener("click",()=>{
   const userId=inviteId.value;
   const link=`t.me/ariapardakhtbot/${userId}`;
-  navigator.clipboard.writeText(`من این بازی رو دوست دارم! شما هم بازی کنید و سکه بگیرید: ${link}`).then(()=>{
+  navigator.clipboard.writeText(`من این بازی را دوست دارم! شما هم بازی کنید و سکه بگیرید: ${link}`).then(()=>{
     alert("لینک دعوت همراه متن تبلیغی کپی شد!");
   });
 });
